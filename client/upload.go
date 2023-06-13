@@ -13,6 +13,7 @@ import (
 
 // generate by chatgpt
 func UploadFile(url, filePath, formName string) error {
+	// open file
 	file, err := os.Open(filePath)
 	if err != nil {
 		log.Printf("failed to open file %s: %v\n", filePath, err)
@@ -20,9 +21,11 @@ func UploadFile(url, filePath, formName string) error {
 	}
 	defer file.Close()
 
+	// create form-data request body
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
+	// create form file with formName
 	part, err := writer.CreateFormFile(formName, filepath.Base(filePath))
 	if err != nil {
 		log.Printf("failed to create form file: %v\n", err)
