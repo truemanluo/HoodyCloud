@@ -9,6 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/file/upload", handler.UploadHandler)
+	http.HandleFunc("/file/download", handler.DownloadHandler)
 
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
